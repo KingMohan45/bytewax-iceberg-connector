@@ -26,7 +26,7 @@ from pyiceberg.types import (
 )
 
 # Example schema definition for a device uplink event table
-streaming_uplink_test_schema = IcebergSchema(
+streaming_test_schema = IcebergSchema(
     fields=[
         IcebergNestedField(id=1, name="device_id", required=False, type=IcebergStringType()),
         IcebergNestedField(id=2, name="organization_id", required=False, type=IcebergStringType()),
@@ -52,7 +52,7 @@ The schema object is used to:
 
 ```python
 import pyarrow as pa
-arrow_schema = streaming_uplink_test_schema.as_arrow()
+arrow_schema = streaming_test_schema.as_arrow()
 arrow_table = pa.Table.from_pylist(records, schema=arrow_schema)
 ```
 
@@ -115,7 +115,7 @@ arrow_table = pa.Table.from_pylist(records, schema=arrow_schema)
   - Tracks last-committed batch/file for recovery.
   - **Partition Key Bug Fix (2025-04):** Partition key extraction now supports both integer and string field references, using a schema mapping to ensure correct key extraction.
 - **Transform Logic:**
-  - Transforms and flattens nested Kafka payloads (e.g., `UplinkEventMessage`) into the flat schema expected by the Iceberg table.
+  - Transforms and flattens nested Kafka payloads (e.g., `EventMessage`) into the flat schema expected by the Iceberg table.
   - Handles timestamp conversion (e.g., ms since epoch to UTC datetime) and error propagation (error/raw columns).
 - **Testing:**
   - Unit tests now cover both named and ordinal partition specs, all transformation edge cases, and proper error handling.

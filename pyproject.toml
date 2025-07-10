@@ -2,8 +2,7 @@
 name = "bytewax-iceberg-connector"
 version = "0.1.0"
 description = "High-performance Apache Iceberg Connector for Bytewax"
-authors = ["Link Labs <noc@link-labs.com>"]
-packages = [{ include = "linklabs", from = "src" }]
+packages = [{ include = "bytewax_iceberg_connector", from = "src" }]
 readme = "README.md"
 
 [tool.poetry.dependencies]
